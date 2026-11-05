@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PeauNette – Vérifie ta routine skincare</title>
+<meta name="description" content="PeauNette analyse tes produits de soin et te dit ce qui va ensemble, ce qui fait doublon et ce qu'il manque. Précommande à 2 €/mois.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #FDF0F2;
+    --rose-fonce: #F5D5DC;
+    --blanc: #FFFFFF;
+    --sauge: #DCE8DE;
+    --sauge-fonce: #4F7058;
+    --texte: #2E3832;
+    --texte-doux: #5B665F;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--rose);
+    color: var(--texte);
+    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .page { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+  h1, h2 {
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+  h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+  h2 { font-size: 1.5rem; margin-bottom: 16px; }
+
+  .hero { padding: 48px 0 32px; }
+  .sous-titre { font-size: 1.15rem; color: var(--texte-doux); margin: 18px 0 0; }
+  .promesse {
+    margin: 28px 0 0;
+    padding: 22px 24px;
+    background: var(--blanc);
+    border-radius: 28px;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  section { padding: 28px 0; }
+  .carte {
+    background: var(--blanc);
+    border-radius: 28px;
+    padding: 28px 24px;
+  }
+
+  ul.liste { list-style: none; margin: 0; padding: 0; }
+  ul.liste li { position: relative; padding: 0 0 14px 40px; }
+  ul.liste li:last-child { padding-bottom: 0; }
+  ul.liste li::before {
+    content: "✓";
+    position: absolute; left: 0; top: 2px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sauge);
+    color: var(--sauge-fonce);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .prix {
+    background: var(--sauge);
+    border-radius: 28px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .prix h2 { text-align: center; }
+  .ancien { color: var(--texte-doux); margin: 0; }
+  .ancien s { text-decoration-thickness: 2px; font-weight: 700; }
+  .nouveau { margin: 14px 0 0; font-weight: 600; }
+  .nouveau strong {
+    display: block;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 3.4rem;
+    line-height: 1.1;
+    color: var(--sauge-fonce);
+  }
+  .places {
+    display: inline-block;
+    margin: 20px 0 0;
+    padding: 8px 18px;
+    background: var(--blanc);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .cta { text-align: center; padding: 36px 0 28px; }
+  .bouton {
+    display: block;
+    width: 100%;
+    padding: 22px 24px;
+    background: var(--sauge-fonce);
+    color: var(--blanc);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 8px 0 #3C5744;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .bouton:hover { transform: translateY(2px); box-shadow: 0 6px 0 #3C5744; }
+  .bouton:active { transform: translateY(8px); box-shadow: 0 0 0 #3C5744; }
+  .bouton:focus-visible, summary:focus-visible { outline: 4px solid var(--sauge-fonce); outline-offset: 4px; }
+  .petit { margin: 26px 0 0; font-size: 0.95rem; color: var(--texte-doux); }
+
+  details {
+    background: var(--blanc);
+    border-radius: 24px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  summary { cursor: pointer; font-weight: 700; list-style: none; padding-right: 28px; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    position: absolute; right: 0; top: -2px;
+    font-size: 1.5rem; color: var(--sauge-fonce);
+  }
+  details[open] summary::after { content: "–"; }
+  details p { margin: 12px 0 0; color: var(--texte-doux); }
+
+  footer {
+    margin-top: 24px;
+    padding: 28px 0 48px;
+    border-top: 2px solid var(--rose-fonce);
+    font-size: 0.9rem;
+    color: var(--texte-doux);
+    text-align: center;
+  }
+  footer p { margin: 0; }
+
+  @media (min-width: 700px) {
+    .hero { padding-top: 72px; }
+    .bouton { width: auto; display: inline-block; padding: 22px 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .bouton { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="hero">
+    <h1>Ta routine skincare est-elle vraiment bonne ? Vérifie-la en 2 minutes.</h1>
+    <p class="sous-titre">PeauNette analyse tes produits de soin et te dit ce qui va ensemble, ce qui fait doublon et ce qu'il manque, sans te ruiner.</p>
+    <p class="promesse">Fini d'empiler 6 produits en espérant que ça marche. Tu sais enfin si ta routine est cohérente.</p>
+  </header>
+
+  <section>
+    <div class="carte">
+      <h2>Ce que tu recevras</h2>
+      <ul class="liste">
+        <li>Un check de ta routine matin et soir : tes produits sont-ils dans le bon ordre ?</li>
+        <li>Les mélanges à éviter (ex : certains actifs qui s'annulent ou irritent)</li>
+        <li>Les doublons repérés : tu arrêtes de payer pour rien</li>
+        <li>Ce qu'il manque vraiment dans ta routine</li>
+        <li>Un accès dès le lancement, pas de mauvaise surprise</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pour qui ?</h2>
+    <p>Pour toi si tu as au moins 4 produits de soin et que tu suis la skincare sur TikTok ou Instagram.</p>
+  </section>
+
+  <section>
+    <div class="prix">
+      <h2>Prix</h2>
+      <p class="ancien">Prix normal : <s>4 €/mois</s></p>
+      <p class="nouveau">Prix de précommande :<strong>2 €/mois</strong>garanti tant que tu restes abonnée</p>
+      <p class="places">Places de précommande limitées : 30 premières abonnées.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Garantie</h2>
+    <p>Tu n'es pas satisfaite au lancement ? Écris-moi, je te rembourse ta précommande. Aucune question.</p>
+  </section>
+
+  <section class="cta">
+    <!-- Lien Stripe en MODE TEST. Avant le vrai lancement, remplace-le par ton lien Stripe réel (garde les guillemets). -->
+    <a class="bouton" href="https://buy.stripe.com/test_fZu28r1QY3Bq0mZa1m4ZG00">Je précommande pour 2 €/mois</a>
+    <p class="petit">Paiement sécurisé. Tu peux annuler quand tu veux.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details>
+      <summary>C'est quoi PeauNette ?</summary>
+      <p>Un outil qui vérifie ta routine skincare.</p>
+    </details>
+    <details>
+      <summary>Quand est-ce que ça démarre ?</summary>
+      <p>Je te préviens par e-mail dès l'ouverture.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="page">
+    <p>PeauNette donne des conseils généraux sur les routines de soin. Ce n'est pas un avis médical. En cas de problème de peau, vois un dermatologue.</p>
+  </div>
+</footer>
+</body>
+</html>
